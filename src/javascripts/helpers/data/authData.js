@@ -3,26 +3,30 @@ import 'firebase/auth';
 
 import boards from '../../components/boards/boards';
 import home from '../../components/home/home';
-
-// const boardsDiv = $('#boards');
-const pinsDiv = $('#pins');
-const logoutButton = $('.logout-button');
-const loginButton = $('#google-auth');
+import pins from '../../components/pins/pins';
+import boardList from '../../components/boardList/boardList';
 
 const checkLoginStatus = () => {
+  const logoutButton = $('.logout-button');
+  const loginButton = $('#google-auth');
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      loginButton.addClass('hide');
       home.removeDiv();
       boards.addDiv();
+      pins.addDiv();
+      loginButton.addClass('hide');
       logoutButton.removeClass('hide');
-      pinsDiv.removeClass('hide');
+
+      boardList.buildMyBoards();
+      pins.pinsBuilder();
     } else {
       home.addDiv();
-      loginButton.removeClass('hide');
       boards.removeDiv();
+      pins.removeDiv();
+      loginButton.removeClass('hide');
       logoutButton.addClass('hide');
-      pinsDiv.addClass('hide');
+
+      home.homeBuilder();
     }
   });
 };
