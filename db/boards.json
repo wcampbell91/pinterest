@@ -1,0 +1,11 @@
+{
+  "board1": {
+    "name": "kitchen"
+  },
+  "board2": {
+    "name": "outdoors"
+  },
+  "board3": {
+    "name": "bedroom"
+  }
+}
