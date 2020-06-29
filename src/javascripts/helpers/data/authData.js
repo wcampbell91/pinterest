@@ -13,7 +13,6 @@ const checkLoginStatus = () => {
     if (user) {
       home.removeDiv();
       boards.addDiv();
-      pins.addDiv();
       loginButton.addClass('hide');
       logoutButton.removeClass('hide');
 

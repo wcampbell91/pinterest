@@ -19,6 +19,7 @@ const buildMyBoards = () => {
       utils.printToDom('#boards', domString);
 
       $('body').on('click', '.view-button', singleBoard.buildSingleBoard);
+      $('body').on('click', '.view-button', boards.removeDiv);
     })
     .catch((err) => console.error('getBoards broke :(', err));
 };
