@@ -7,10 +7,10 @@ const removeDiv = () => {
 };
 
 const boardBuilder = (board) => {
-  console.error(board);
-  const domString = `<div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">${board.name}</h5>
+  const domString = `<div class="card text-center" id="${board.id}">   
+                      <div class="card-body board-card" id="${board.id}">
+                        <h3 class="card-title">${board.name}</h3>
+                        <button class="btn btn-secondary view-button">View</button>
                       </div>
                     </div>`;
 
