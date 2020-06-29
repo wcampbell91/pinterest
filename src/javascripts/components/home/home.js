@@ -10,8 +10,8 @@ const removeDiv = () => {
 
 const homeBuilder = () => {
   const domString = `
-  <div class="col-6">
-    <h1>Pinterest</h1>
+  <div class="text-center mt-4">
+    <h1>Welcome to Pinterest!</h1>
   </div>`;
 
   utils.printToDom('#home', domString);

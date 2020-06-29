@@ -8,7 +8,7 @@ const buildMyBoards = () => {
     .then((response) => {
       const myBoards = response;
       let domString = `
-      <h2 class="text-center">My Boards</h2>
+      <h2 class="text-center mt-4 mb-4">My Boards</h2>
       <div class="d-flex flex-wrap myBoards card-deck">`;
 
       myBoards.forEach((board) => {

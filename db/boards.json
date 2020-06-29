@@ -1,11 +1,11 @@
 {
   "board1": {
-    "name": "kitchen"
+    "name": "Kitchen"
   },
   "board2": {
-    "name": "outdoors"
+    "name": "Outdoors"
   },
   "board3": {
-    "name": "bedroom"
+    "name": "Bedroom"
   }
 }
