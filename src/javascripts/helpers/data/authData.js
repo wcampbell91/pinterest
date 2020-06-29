@@ -18,7 +18,6 @@ const checkLoginStatus = () => {
       logoutButton.removeClass('hide');
 
       boardList.buildMyBoards();
-      pins.pinsBuilder();
     } else {
       home.addDiv();
       boards.removeDiv();
