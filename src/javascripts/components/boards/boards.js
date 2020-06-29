@@ -7,8 +7,8 @@ const removeDiv = () => {
 };
 
 const boardBuilder = (board) => {
-  const domString = `<div class="card text-center" id="${board.id}">   
-                      <div class="card-body board-card" id="${board.id}">
+  const domString = `<div class="card text-center board-card" id="${board.id}">   
+                      <div class="card-body" id="${board.name}">
                         <h3 class="card-title">${board.name}</h3>
                         <button class="btn btn-secondary view-button">View</button>
                       </div>

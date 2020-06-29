@@ -7,22 +7,23 @@ import './singleBoard.scss';
 
 const buildSingleBoard = (e) => {
   const boardId = e.target.closest('.card').id;
+  const boardName = e.target.closest('.card-body').id;
+
   pins.addDiv();
   pinData.getPins()
     .then((response) => {
       const myPins = response;
       let domString = `
-                      <h2 class="text-center">${boardId}'s Pins</h2>
+                      <h2 class="text-center mt-4 mb-4">${boardName}</h2>
                       <div class="d-flex flex-wrap myPins card-deck">`;
       myPins.forEach((pin) => {
         if (pin.boardId === boardId) {
           domString += `
                         <div class="card pins-card text-center" style="width: 18rem;">
-                          <img src="${pin.imageUrl}" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h5 class="card-title">${pin.id}</h5>
-                            <a href="${pin.link}" class="btn btn-primary">Visit Site</a>
-                          </div>
+                          <a href="${pin.link}">
+                            <img src="${pin.imageUrl}" class="card-img-top pin-image" alt="...">
+                          </a>
+                          <div class="overlay"></div>
                         </div>`;
         }
       });
@@ -33,7 +34,6 @@ const buildSingleBoard = (e) => {
                     </div>`;
 
       utils.printToDom('#pins', domString);
-
       $('body').on('click', '#back-button', boards.addDiv);
       $('body').on('click', '#back-button', pins.removeDiv);
       $('body').on('click', '.navbar-brand', boards.addDiv);
