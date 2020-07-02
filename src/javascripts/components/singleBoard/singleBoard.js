@@ -11,20 +11,19 @@ const removePinEvent = (e) => {
     .then(() => {
       // eslint-disable-next-line no-use-before-define
       rebuildSingleBoard(e);
+      utils.printToDom('#pins', '');
     })
     .catch((err) => console.error(err));
 };
 
 const buildSingleBoard = (e) => {
   const boardId = e.target.closest('.card').id;
-  const boardName = e.target.closest('.card-body').id;
 
   pins.addDiv();
   pinData.getPins()
     .then((response) => {
       const myPins = response;
       let domString = `
-                      <h2 class="text-center mt-4 mb-4">${boardName}</h2>
                       <div class="d-flex flex-wrap myPins card-deck">`;
       myPins.forEach((pin) => {
         if (pin.boardId === boardId) {
@@ -54,18 +53,17 @@ const buildSingleBoard = (e) => {
     .catch((err) => console.error('singleBoards broke', err));
 };
 
+// I THINK YOU NEED TO ADD PINS TO THE BOARDS.JSON SO THEY'RE ACCESIBLE TOGETHER!
 const rebuildSingleBoard = (e) => {
   console.error(e);
-  const boardId = e.target.closest('.card').id;
-  const boardName = e.target.id;
-
+  const boardId = e.target.id;
   pins.addDiv();
   pinData.getPins()
     .then((response) => {
       const myPins = response;
       let domString = `
-                      <h2 class="text-center mt-4 mb-4">${boardName}</h2>
                       <div class="d-flex flex-wrap myPins card-deck">`;
+
       myPins.forEach((pin) => {
         if (pin.boardId === boardId) {
           domString += `
@@ -85,7 +83,6 @@ const rebuildSingleBoard = (e) => {
                     </div>`;
 
       utils.printToDom('#pins', domString);
-      $('body').on('click', '.delete-pin', removePinEvent);
       $('body').on('click', '#back-button', boards.addDiv);
       $('body').on('click', '#back-button', pins.removeDiv);
       $('body').on('click', '.navbar-brand', boards.addDiv);
