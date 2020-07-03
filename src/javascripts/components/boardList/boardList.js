@@ -9,7 +9,6 @@ const deleteBoardEvent = (e) => {
 
   pinData.getPinsByBoardId(boardId)
     .then((boardPins) => {
-      console.error(boardPins);
       boardPins.forEach((pin) => {
         pinData.deletePins(pin.id);
       });
