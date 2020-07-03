@@ -20,6 +20,21 @@ const getPins = () => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
+const getPinsByBoardId = (boardId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/pins.json?orderBy="boardId"&equalTo="${boardId}"`)
+    .then((response) => {
+      const boardPinsObj = response.data;
+      const boardPins = [];
+      Object.keys(boardPinsObj).forEach((boardPinsId) => {
+        boardPinsObj[boardPinsId].id = boardPinsId;
+        boardPins.push(boardPinsObj[boardPinsId]);
+      });
+
+      resolve(boardPins);
+    })
+    .catch((err) => reject(err));
+});
+
 const deletePins = (pinId) => axios.delete(`${baseUrl}/pins/${pinId}.json`);
 
-export default { getPins, deletePins };
+export default { getPins, deletePins, getPinsByBoardId };
