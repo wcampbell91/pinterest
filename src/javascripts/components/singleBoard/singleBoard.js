@@ -11,7 +11,6 @@ const removePinEvent = (e) => {
     .then(() => {
       // eslint-disable-next-line no-use-before-define
       rebuildSingleBoard(e);
-      utils.printToDom('#pins', '');
     })
     .catch((err) => console.error(err));
 };
@@ -23,6 +22,7 @@ const buildSingleBoard = (e) => {
   pinData.getPins()
     .then((response) => {
       const myPins = response;
+      console.error(myPins);
       let domString = `
                       <div class="d-flex flex-wrap myPins card-deck">`;
       myPins.forEach((pin) => {
@@ -71,7 +71,7 @@ const rebuildSingleBoard = (e) => {
                           <a href="${pin.link}">
                             <img src="${pin.imageUrl}" class="card-img-top pin-image" alt="...">
                           </a>
-                          <button class="btn btn-secondary delete-pin">Delete pin</button>
+                          <button class="btn btn-secondary delete-pin" id="${pin.boardId}">Delete pin</button>
                           <div class="overlay"></div>
                         </div>`;
         }
