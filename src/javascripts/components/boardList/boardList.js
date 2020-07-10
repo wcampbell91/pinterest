@@ -25,6 +25,7 @@ const buildMyBoards = () => {
   boardData.getBoards()
     .then((response) => {
       const myBoards = response;
+      console.error('Im in the board function');
       let domString = `
       <h2 class="text-center mt-4 mb-4">My Boards</h2>
       <div class="d-flex flex-wrap myBoards card-deck">`;
@@ -35,12 +36,14 @@ const buildMyBoards = () => {
       domString += '</div>';
 
       utils.printToDom('#boards', domString);
-
-      $('body').on('click', '.view-button', singleBoard.buildSingleBoard);
-      $('body').on('click', '.delete-board-button', deleteBoardEvent);
-      $('body').on('click', '.view-button', boards.removeDiv);
     })
     .catch((err) => console.error('getBoards broke :(', err));
 };
 
-export default { buildMyBoards };
+const boardEvents = () => {
+  $('body').on('click', '.view-button', singleBoard.buildSingleBoard);
+  $('body').on('click', '.delete-board-button', deleteBoardEvent);
+  $('body').on('click', '.view-button', boards.removeDiv);
+};
+
+export default { buildMyBoards, boardEvents };

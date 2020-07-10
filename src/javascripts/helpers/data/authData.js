@@ -5,6 +5,7 @@ import boards from '../../components/boards/boards';
 import home from '../../components/home/home';
 import pins from '../../components/pins/pins';
 import boardList from '../../components/boardList/boardList';
+import singleBoard from '../../components/singleBoard/singleBoard';
 
 const checkLoginStatus = () => {
   const logoutButton = $('.logout-button');
@@ -17,6 +18,8 @@ const checkLoginStatus = () => {
       logoutButton.removeClass('hide');
 
       boardList.buildMyBoards();
+      boardList.boardEvents();
+      singleBoard.pinEvents();
     } else {
       home.addDiv();
       boards.removeDiv();
