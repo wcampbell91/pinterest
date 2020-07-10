@@ -11,7 +11,6 @@ const removeDiv = () => {
 const showPinForm = () => {
   addDiv();
   const domString = `
-  <div class="card" id="peporrine">
     <form>
       <div class="form-group">
         <label for="pin-boardId">Board Id</label>
@@ -27,7 +26,6 @@ const showPinForm = () => {
       </div>
       <button type="submit" class="btn btn-primary" id="pin-creator">Submit</button>
     </form>
-  </div>
   `;
 
   utils.printToDom('#newPin', domString);
