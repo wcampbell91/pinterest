@@ -51,6 +51,7 @@ const buildSingleBoard = (e) => {
                             <img src="${pin.imageUrl}" class="card-img-top pin-image" alt="...">
                           </a>
                           <button class="btn btn-secondary delete-pin" id="${pin.id}">Delete pin</button>
+                          <button class="btn btn-secondary" id="edit-pin">Delete pin</button>
                           <div class="overlay"></div>
                         </div>`;
         }
