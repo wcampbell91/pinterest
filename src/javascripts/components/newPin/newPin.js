@@ -14,7 +14,7 @@ const showPinForm = () => {
     <form>
       <div class="form-group">
         <label for="pin-boardId">Board Id</label>
-        <input type="text" class="form-control" id="pin-boardId" placeholder="ex. board1">
+        <input type="text" class="form-control pin-boardId" id="pin-boardId" placeholder="ex. board1">
       </div>
       <div class="form-group">
         <label for="pin-imageUrl">Image Url</label>

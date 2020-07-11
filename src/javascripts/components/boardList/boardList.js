@@ -41,7 +41,6 @@ const buildMyBoards = () => {
   boardData.getBoards()
     .then((response) => {
       const myBoards = response;
-      console.error('Im in the board function');
       let domString = `
       <h2 class="text-center mt-4 mb-4">My Boards</h2>
       <div class="d-flex flex-wrap myBoards card-deck">`;
