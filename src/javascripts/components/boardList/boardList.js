@@ -24,8 +24,10 @@ const deleteBoardEvent = (e) => {
 
 const addBoardEvent = (e) => {
   e.preventDefault();
+  let id = 0;
   const newBoards = {
     name: $('#board-name').val(),
+    id,
   };
   boardData.addBoard(newBoards)
     .then(() => {
@@ -33,6 +35,7 @@ const addBoardEvent = (e) => {
 
       // eslint-disable-next-line no-use-before-define
       buildMyBoards();
+      id += 1;
     })
     .catch((err) => console.error(err));
 };
@@ -41,6 +44,7 @@ const buildMyBoards = () => {
   boardData.getBoards()
     .then((response) => {
       const myBoards = response;
+      console.error(myBoards);
       let domString = `
       <h2 class="text-center mt-4 mb-4">My Boards</h2>
       <div class="d-flex flex-wrap myBoards card-deck">`;
