@@ -21,7 +21,7 @@ const removePinEvent = (e) => {
 const addPinEvent = (e) => {
   e.preventDefault();
   const newPins = {
-    boardId: $('#pin-boardId').val(),
+    boardId: document.getElementById('board-id-finder').dataset.boardId,
     link: $('#pin-webUrl').val(),
     imageUrl: $('#pin-imageUrl').val(),
   };
@@ -39,7 +39,7 @@ const editPinEvent = (e) => {
   const pinId = e.target.closest('.pin-updater').id;
 
   const updatedPin = {
-    boardId: $('#edit-board-id').val(),
+    boardId: document.getElementById('board-id-finder').dataset.boardId,
     link: $('#edit-webUrl').val(),
     imageUrl: $('#edit-imageUrl').val(),
   };
@@ -62,7 +62,7 @@ const buildSingleBoard = (e) => {
     .then((response) => {
       const myPins = response;
       let domString = `
-                      <div class="d-flex flex-wrap myPins card-deck">`;
+                      <div class="d-flex flex-wrap myPins card-deck" id="board-id-finder" data-board-id=${boardId}>`;
       myPins.forEach((pin) => {
         if (pin.boardId === boardId) {
           domString += `
@@ -89,15 +89,15 @@ const buildSingleBoard = (e) => {
 };
 
 const rebuildSingleBoard = () => {
-  const boardId = $('.pin-boardId').val();
-  console.error(boardId);
+  // eslint-disable-next-line prefer-destructuring
+  const boardId = document.getElementById('board-id-finder').dataset.boardId;
   pins.addDiv();
   pinData.getPins()
     .then((response) => {
       const myPins = response;
       console.error(myPins);
       let domString = `
-                      <div class="d-flex flex-wrap myPins card-deck">`;
+                      <div class="d-flex flex-wrap myPins card-deck" id="board-id-finder" data-board-id=${boardId}>`;
       myPins.forEach((pin) => {
         if (pin.boardId === boardId) {
           domString += `
@@ -127,9 +127,13 @@ const showEditForm = (e) => {
   editPin.showForm(e.target.id);
 };
 
+// const showAddForm = (e) => {
+//   newPin.showPinForm(e.target.id)
+// }
+
 const pinEvents = () => {
   $('body').on('click', '#add-pin', newPin.showPinForm);
-  $('body').on('click', '#pin-creator', addPinEvent);
+  $('body').one('click', '#pin-creator', addPinEvent);
   $('body').one('click', '.delete-pin', removePinEvent);
   $('body').on('click', '#back-button', boards.addDiv);
   $('body').on('click', '#back-button', pins.removeDiv);
