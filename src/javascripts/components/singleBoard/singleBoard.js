@@ -3,6 +3,7 @@ import utils from '../../helpers/utils';
 import boards from '../boards/boards';
 import pins from '../pins/pins';
 import newPin from '../newPin/newPin';
+import editPin from '../editPin/editPin';
 
 import './singleBoard.scss';
 
@@ -33,6 +34,26 @@ const addPinEvent = (e) => {
     .catch((err) => console.error(err));
 };
 
+const editPinEvent = (e) => {
+  e.preventDefault();
+  const pinId = e.target.closest('.pin-updater').id;
+
+  const updatedPin = {
+    boardId: $('#edit-board-id').val(),
+    link: $('#edit-webUrl').val(),
+    imageUrl: $('#edit-imageUrl').val(),
+  };
+  console.error(updatedPin);
+
+  pinData.updatePin(pinId, updatedPin)
+    .then(() => {
+      editPin.removeDiv();
+      // eslint-disable-next-line no-use-before-define
+      rebuildSingleBoard();
+    })
+    .catch((err) => console.error(err));
+};
+
 const buildSingleBoard = (e) => {
   const boardId = e.target.closest('.card').id;
 
@@ -40,7 +61,6 @@ const buildSingleBoard = (e) => {
   pinData.getPins()
     .then((response) => {
       const myPins = response;
-      console.error(myPins);
       let domString = `
                       <div class="d-flex flex-wrap myPins card-deck">`;
       myPins.forEach((pin) => {
@@ -51,7 +71,7 @@ const buildSingleBoard = (e) => {
                             <img src="${pin.imageUrl}" class="card-img-top pin-image" alt="...">
                           </a>
                           <button class="btn btn-secondary delete-pin" id="${pin.id}">Delete pin</button>
-                          <button class="btn btn-secondary" id="edit-pin">Delete pin</button>
+                          <button class="btn btn-secondary edit-pin" id="${pin.id}">Update Pin</button>
                           <div class="overlay"></div>
                         </div>`;
         }
@@ -69,9 +89,8 @@ const buildSingleBoard = (e) => {
 };
 
 const rebuildSingleBoard = () => {
-  const boardId = $('#pin-boardId').val();
+  const boardId = $('.pin-boardId').val();
   console.error(boardId);
-
   pins.addDiv();
   pinData.getPins()
     .then((response) => {
@@ -87,6 +106,7 @@ const rebuildSingleBoard = () => {
                             <img src="${pin.imageUrl}" class="card-img-top pin-image" alt="...">
                           </a>
                           <button class="btn btn-secondary delete-pin" id="${pin.id}">Delete pin</button>
+                          <button class="btn btn-secondary edit-pin" id="${pin.id}">Update Pin</button>
                           <div class="overlay"></div>
                         </div>`;
         }
@@ -103,6 +123,10 @@ const rebuildSingleBoard = () => {
     .catch((err) => console.error('singleBoards broke', err));
 };
 
+const showEditForm = (e) => {
+  editPin.showForm(e.target.id);
+};
+
 const pinEvents = () => {
   $('body').on('click', '#add-pin', newPin.showPinForm);
   $('body').on('click', '#pin-creator', addPinEvent);
@@ -112,6 +136,12 @@ const pinEvents = () => {
   $('body').on('click', '#back-button', newPin.removeDiv);
   $('body').on('click', '.navbar-brand', boards.addDiv);
   $('body').on('click', '.navbar-brand', pins.removeDiv);
+  $('body').on('click', '.edit-pin', showEditForm);
+  $('body').on('click', '#update-pin', editPinEvent);
 };
 
-export default { buildSingleBoard, pinEvents, rebuildSingleBoard };
+export default {
+  buildSingleBoard,
+  pinEvents,
+  rebuildSingleBoard,
+};
