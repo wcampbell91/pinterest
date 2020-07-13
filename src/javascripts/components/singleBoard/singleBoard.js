@@ -39,7 +39,7 @@ const editPinEvent = (e) => {
   const pinId = e.target.closest('.pin-updater').id;
 
   const updatedPin = {
-    boardId: document.getElementById('board-id-finder').dataset.boardId,
+    boardId: $('#edit-board-id').val(),
     link: $('#edit-webUrl').val(),
     imageUrl: $('#edit-imageUrl').val(),
   };
@@ -70,9 +70,9 @@ const buildSingleBoard = (e) => {
                           <a href="${pin.link}">
                             <img src="${pin.imageUrl}" class="card-img-top pin-image" alt="...">
                           </a>
+                          <div class="overlay"></div>
                           <button class="btn btn-secondary delete-pin" id="${pin.id}">Delete pin</button>
                           <button class="btn btn-secondary edit-pin" id="${pin.id}">Update Pin</button>
-                          <div class="overlay"></div>
                         </div>`;
         }
       });
